@@ -6,6 +6,12 @@ body {
     background: #f8fbff;
     color: #263454;
     overflow-x: hidden;
+
+    /* Mencegah semua teks diseleksi / disalin */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .container {
@@ -1588,4 +1594,62 @@ footer span {
         padding: 18px;
     }
 
+}
+/* ==================================================
+   TOMBOL KEMBALI KE ATAS
+================================================== */
+
+#backToTop {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #18264a;
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    z-index: 999;
+}
+
+
+/* Tombol muncul */
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+/* Efek saat mouse diarahkan */
+
+#backToTop:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(24, 38, 74, 0.25);
 }

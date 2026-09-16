@@ -5,67 +5,93 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+
     /* ==================================================
        1. DROPDOWN NAVBAR
     ================================================== */
 
-    const dropdown = document.querySelector(".dropdown");
-    const dropdownBtn = document.querySelector(".dropdown-btn");
+    const dropdown =
+        document.querySelector(".dropdown");
+
+    const dropdownBtn =
+        document.querySelector(".dropdown-btn");
+
 
     if (dropdown && dropdownBtn) {
 
-        dropdownBtn.setAttribute("aria-expanded", "false");
-
-        dropdownBtn.addEventListener("click", function (event) {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            const isOpen = dropdown.classList.toggle("open");
-
-            dropdownBtn.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
-
-        });
+        dropdownBtn.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
 
-        // Menutup dropdown ketika klik di luar
-        document.addEventListener("click", function (event) {
+        dropdownBtn.addEventListener(
+            "click",
+            function (event) {
 
-            if (!dropdown.contains(event.target)) {
+                event.preventDefault();
+                event.stopPropagation();
 
-                dropdown.classList.remove("open");
+                const isOpen =
+                    dropdown.classList.toggle("open");
 
                 dropdownBtn.setAttribute(
                     "aria-expanded",
-                    "false"
+                    isOpen
                 );
 
             }
+        );
 
-        });
+
+        // Menutup dropdown ketika klik di luar
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                if (!dropdown.contains(event.target)) {
+
+                    dropdown.classList.remove("open");
+
+                    dropdownBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
 
 
         // Menutup dropdown setelah memilih menu
         const dropdownLinks =
-            dropdown.querySelectorAll(".dropdown-menu a");
+            dropdown.querySelectorAll(
+                ".dropdown-menu a"
+            );
 
-        dropdownLinks.forEach(function (link) {
 
-            link.addEventListener("click", function () {
+        dropdownLinks.forEach(
+            function (link) {
 
-                dropdown.classList.remove("open");
+                link.addEventListener(
+                    "click",
+                    function () {
 
-                dropdownBtn.setAttribute(
-                    "aria-expanded",
-                    "false"
+                        dropdown.classList.remove(
+                            "open"
+                        );
+
+                        dropdownBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
                 );
 
-            });
-
-        });
+            }
+        );
 
     }
 
@@ -75,49 +101,69 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================================== */
 
     const skillBars =
-        document.querySelectorAll(".bar span");
+        document.querySelectorAll(
+            ".bar span"
+        );
+
 
     if (skillBars.length > 0) {
 
-        skillBars.forEach(function (bar) {
+        skillBars.forEach(
+            function (bar) {
 
-            const targetWidth = bar.style.width;
+                const targetWidth =
+                    bar.style.width;
 
-            if (!targetWidth) {
-                return;
+
+                if (!targetWidth) {
+                    return;
+                }
+
+
+                // Simpan nilai asli
+                bar.dataset.width =
+                    targetWidth;
+
+
+                // Mulai dari 0
+                bar.style.width = "0";
+
+
+                // Animasi menggunakan transition
+                bar.style.transition =
+                    "width 1.5s ease";
+
             }
-
-            // Simpan nilai asli
-            bar.dataset.width = targetWidth;
-
-            // Mulai dari 0
-            bar.style.width = "0";
-
-            // Animasi menggunakan transition
-            bar.style.transition =
-                "width 1.5s ease";
-
-        });
+        );
 
 
         const skillObserver =
             new IntersectionObserver(
                 function (entries, observer) {
 
-                    entries.forEach(function (entry) {
+                    entries.forEach(
+                        function (entry) {
 
-                        if (entry.isIntersecting) {
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            const bar = entry.target;
+                                const bar =
+                                    entry.target;
 
-                            bar.style.width =
-                                bar.dataset.width;
 
-                            observer.unobserve(bar);
+                                bar.style.width =
+                                    bar.dataset.width;
+
+
+                                observer.unobserve(
+                                    bar
+                                );
+
+                            }
 
                         }
-
-                    });
+                    );
 
                 },
                 {
@@ -126,11 +172,15 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        skillBars.forEach(function (bar) {
+        skillBars.forEach(
+            function (bar) {
 
-            skillObserver.observe(bar);
+                skillObserver.observe(
+                    bar
+                );
 
-        });
+            }
+        );
 
     }
 
@@ -140,7 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================================== */
 
     const contactForm =
-        document.querySelector(".contact-form form");
+        document.querySelector(
+            ".contact-form form"
+        );
+
 
     if (contactForm) {
 
@@ -149,16 +202,26 @@ document.addEventListener("DOMContentLoaded", function () {
             function (event) {
 
                 const nama =
-                    document.querySelector("#nama");
+                    document.querySelector(
+                        "#nama"
+                    );
 
                 const email =
-                    document.querySelector("#email");
+                    document.querySelector(
+                        "#email"
+                    );
 
                 const pesan =
-                    document.querySelector("#pesan");
+                    document.querySelector(
+                        "#pesan"
+                    );
 
 
-                if (!nama || !email || !pesan) {
+                if (
+                    !nama ||
+                    !email ||
+                    !pesan
+                ) {
                     return;
                 }
 
@@ -195,7 +258,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-                if (!emailPattern.test(emailValue)) {
+                if (
+                    !emailPattern.test(
+                        emailValue
+                    )
+                ) {
 
                     event.preventDefault();
 
@@ -225,7 +292,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // Jika valid, biarkan mailto berjalan
+                // Jika valid,
+                // biarkan mailto berjalan
                 const button =
                     contactForm.querySelector(
                         "button[type='submit']"
@@ -257,22 +325,34 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-    inputs.forEach(function (input) {
+    inputs.forEach(
+        function (input) {
 
-        input.addEventListener("focus", function () {
+            input.addEventListener(
+                "focus",
+                function () {
 
-            input.classList.add("input-focus");
+                    input.classList.add(
+                        "input-focus"
+                    );
 
-        });
+                }
+            );
 
 
-        input.addEventListener("blur", function () {
+            input.addEventListener(
+                "blur",
+                function () {
 
-            input.classList.remove("input-focus");
+                    input.classList.remove(
+                        "input-focus"
+                    );
 
-        });
+                }
+            );
 
-    });
+        }
+    );
 
 
     /* ==================================================
@@ -280,31 +360,39 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================================== */
 
     const projectCards =
-        document.querySelectorAll(".project-card");
-
-
-    projectCards.forEach(function (card) {
-
-        card.addEventListener(
-            "mouseenter",
-            function () {
-
-                card.classList.add("project-active");
-
-            }
+        document.querySelectorAll(
+            ".project-card"
         );
 
 
-        card.addEventListener(
-            "mouseleave",
-            function () {
+    projectCards.forEach(
+        function (card) {
 
-                card.classList.remove("project-active");
+            card.addEventListener(
+                "mouseenter",
+                function () {
 
-            }
-        );
+                    card.classList.add(
+                        "project-active"
+                    );
 
-    });
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function () {
+
+                    card.classList.remove(
+                        "project-active"
+                    );
+
+                }
+            );
+
+        }
+    );
 
 
     /* ==================================================
@@ -312,7 +400,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ================================================== */
 
     const yearElement =
-        document.querySelector("[data-year]");
+        document.querySelector(
+            "[data-year]"
+        );
 
 
     if (yearElement) {
@@ -329,6 +419,307 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log(
         "✨ Portfolio Nur Agifah berhasil dimuat!"
+    );
+
+
+    /* ==================================================
+       8. TOMBOL KEMBALI KE ATAS
+    ================================================== */
+
+    const backToTop =
+        document.querySelector(
+            "#backToTop"
+        );
+
+
+    if (backToTop) {
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (window.scrollY > 300) {
+
+                    backToTop.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    backToTop.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       9. ANIMASI REVEAL SAAT SCROLL
+    ================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    if (revealElements.length > 0) {
+
+        const revealObserver =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "active"
+                                );
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.15
+                }
+            );
+
+
+        revealElements.forEach(
+            function (element) {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       10. NAVBAR AKTIF
+    ================================================== */
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase();
+
+
+    const navLinks =
+        document.querySelectorAll(
+            ".nav-menu a"
+        );
+
+
+    navLinks.forEach(
+        function (link) {
+
+            const linkPage =
+                link.getAttribute("href");
+
+
+            if (!linkPage) {
+                return;
+            }
+
+
+            const cleanLink =
+                linkPage
+                    .split("#")[0]
+                    .toLowerCase();
+
+
+            if (
+                cleanLink === currentPage ||
+                (
+                    currentPage === "" &&
+                    cleanLink === "index.html"
+                )
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       11. TUTUP DROPDOWN DENGAN ESCAPE
+    ================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                if (dropdown) {
+
+                    dropdown.classList.remove(
+                        "open"
+                    );
+
+                }
+
+
+                if (dropdownBtn) {
+
+                    dropdownBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       12. SALIN EMAIL
+       Berfungsi jika ada elemen .copy-email
+    ================================================== */
+
+    const copyEmail =
+        document.querySelector(
+            ".copy-email"
+        );
+
+
+    if (copyEmail) {
+
+        copyEmail.addEventListener(
+            "click",
+            async function () {
+
+                const emailText =
+                    copyEmail.dataset.email;
+
+
+                if (!emailText) {
+                    return;
+                }
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        emailText
+                    );
+
+
+                    const oldText =
+                        copyEmail.textContent;
+
+
+                    copyEmail.textContent =
+                        "Email berhasil disalin ✓";
+
+
+                    setTimeout(
+                        function () {
+
+                            copyEmail.textContent =
+                                oldText;
+
+                        },
+                        2000
+                    );
+
+
+                } catch (error) {
+
+                    console.log(
+                        "Email tidak dapat disalin."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* ==================================================
+       13. TUTUP DROPDOWN SAAT MEMILIH MENU
+    ================================================== */
+
+    const mobileMenuLinks =
+        document.querySelectorAll(
+            ".nav-menu a"
+        );
+
+
+    mobileMenuLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    if (dropdown) {
+
+                        dropdown.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+
+                    if (dropdownBtn) {
+
+                        dropdownBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
     );
 
 });
